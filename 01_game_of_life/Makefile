@@ -9,8 +9,12 @@ VIVADO=vivado -mode batch -source
 
 DECODERS=decoder_1_to_2.sv decoder_2_to_4.sv decoder_3_to_8.sv
 
+
 test_decoders: test_decoders.sv $(DECODERS)
 	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin
+
+test_adders: test_adders.sv adder_1.sv adder_n.sv
+	${IVERILOG} $^ -o test_adders.bin && ${VVP} test_adders.bin
 
 test_led_array_driver: test_led_array_driver.sv led_array_driver.sv led_array_model.sv $(DECODERS)
 	${IVERILOG} $^ -o test_led_array_driver.bin && ${VVP} test_led_array_driver.bin

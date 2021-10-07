@@ -4,7 +4,7 @@ module decoder_3_to_8(ena, in, out);
   input wire [2:0] in;
   output logic [7:0] out;
 
-  output logic [1:0] out_en;
+  logic [1:0] out_en;
 
   decoder_1_to_2 deco_en(ena, in[2], out_en);
 

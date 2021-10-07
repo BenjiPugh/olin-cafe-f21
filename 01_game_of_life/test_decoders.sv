@@ -19,6 +19,7 @@ module test_decoders;
     // Collect waveforms
     $dumpfile("decoders.vcd");
     $dumpvars(0, UUT);
+    $dumpvars(0, UUT_2_4);
     
     ena = 1;
     $display("ena in | out");
