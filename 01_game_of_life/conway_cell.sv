@@ -12,22 +12,39 @@ module conway_cell(clk, rst, ena, state_0, state_d, state_q, neighbors);
   input wire [7:0] neighbors;
   logic [3:0] living_neighbors;
 
-  always_comb begin
+  logic [7:0] one_bit_sums;
 
-    
+  adder_1 adder_1_1 (.a(neighbors[0]), .b(neighbors[1]), .c_in(1'b0), .sum(one_bit_sums[0]), .c_out(one_bit_sums[1]));
+  adder_1 adder_1_2 (.a(neighbors[2]), .b(neighbors[3]), .c_in(1'b0), .sum(one_bit_sums[2]), .c_out(one_bit_sums[3]));
+  adder_1 adder_1_3 (.a(neighbors[4]), .b(neighbors[5]), .c_in(1'b0), .sum(one_bit_sums[4]), .c_out(one_bit_sums[5]));
+  adder_1 adder_1_4 (.a(neighbors[6]), .b(neighbors[7]), .c_in(1'b0), .sum(one_bit_sums[6]), .c_out(one_bit_sums[7]));
+
+  logic [5:0] two_bit_sums;
+
+  adder_n #(.N(2)) adder_2_1 (.a(one_bit_sums[1:0]), .b(one_bit_sums[3:2]), .c_in(1'b0), .sum(two_bit_sums[1:0]), .c_out(two_bit_sums[2]));
+  adder_n #(.N(2)) adder_2_2 (.a(one_bit_sums[5:4]), .b(one_bit_sums[7:6]), .c_in(1'b0), .sum(two_bit_sums[4:3]), .c_out(two_bit_sums[5]));
+
+  adder_n #(.N(3)) adder_3 (.a(two_bit_sums[2:0]), .b(two_bit_sums[5:3]), .c_in(1'b0), .sum(living_neighbors[2:0]), .c_out(living_neighbors[3]));
+
+  logic is_3;
+  logic continue_alive;
+
+  always_comb begin
+    is_3 = ~living_neighbors[3] & ~living_neighbors[2] & living_neighbors[1] & living_neighbors[0];
+    continue_alive = state_q & ~living_neighbors[3] & ~living_neighbors[2] & living_neighbors[1] & ~living_neighbors[0];
+    state_d = is_3 | continue_alive;
   end
 
+  logic enabled_output;
+  logic reset_output;
+
   always_comb begin
-
-	  state_d = (~living_neighbors[3] & ~living_neighbors[2] & living_neighbors[1]) & 
-		    ((state_0 & ~living_neighbors[0]) | living_neighbors[0]);
-
+    enabled_output = (ena)?state_d:state_q;
+    reset_output = (rst)?state_0:enabled_output;
   end
 
   always_ff @(posedge clk) begin
-
-	  state_q <= state_d;
-
+	  state_q <=  state_d;
   end
 
 

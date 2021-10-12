@@ -29,6 +29,22 @@ module led_array_driver(ena, x, cells, rows, cols);
   wire [N-1:0] x_decoded;
   decoder_3_to_8 COL_DECODER(ena, x, x_decoded);
   
+  assign cols = x_decoded;
+
+  generate
+    genvar i;
+    for (i = 0; i < N; i++) begin
+      logic [N-1:0] row_products; 
+      genvar j;      
+      for (j = 0; j < N; j++) begin
+        assign row_products[j] = x_decoded[j] & cells[i*N + j];
+      end
+      assign rows[i] =~(|row_products); 
+    end
+  endgenerate
+
+
+
 endmodule
 
 `default_nettype wire // reengages default behaviour, needed when using 
