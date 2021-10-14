@@ -44,7 +44,7 @@ module conway_cell(clk, rst, ena, state_0, state_d, state_q, neighbors);
   end
 
   always_ff @(posedge clk) begin
-	  state_q <=  state_d;
+	  state_q <=  reset_output;
   end
 
 

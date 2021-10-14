@@ -39,7 +39,7 @@ module led_array_driver(ena, x, cells, rows, cols);
       for (j = 0; j < N; j++) begin
         assign row_products[j] = x_decoded[j] & cells[i*N + j];
       end
-      assign rows[i] =~(|row_products); 
+      assign rows[i] = ena & ~(|row_products); 
     end
   endgenerate
 
