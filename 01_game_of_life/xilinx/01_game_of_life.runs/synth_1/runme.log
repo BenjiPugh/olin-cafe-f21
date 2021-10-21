@@ -1,0 +1,39 @@
+
+*** Running vivado
+    with args -log main.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source main.tcl
+
+
+****** Vivado v2021.1 (64-bit)
+  **** SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+  **** IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+    ** Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+source main.tcl -notrace
+Command: synth_design -top main -part xc7a15tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a15t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a15t'
+INFO: [Device 21-403] Loading part xc7a15tcpg236-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 14568
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2442.309 ; gain = 0.000 ; free physical = 307 ; free virtual = 3278
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'main' [/home/beb/Documents/CompArch/olin-cafe-f21/01_game_of_life/main.sv:27]
+INFO: [Synth 8-6157] synthesizing module 'conway_cell' [/home/beb/Documents/CompArch/olin-cafe-f21/01_game_of_life/conway_cell.sv:3]
+ERROR: [Synth 8-439] module 'adder_1' not found [/home/beb/Documents/CompArch/olin-cafe-f21/01_game_of_life/conway_cell.sv:17]
+ERROR: [Synth 8-6156] failed synthesizing module 'conway_cell' [/home/beb/Documents/CompArch/olin-cafe-f21/01_game_of_life/conway_cell.sv:3]
+ERROR: [Synth 8-196] conditional expression could not be resolved to a constant [/home/beb/Documents/CompArch/olin-cafe-f21/01_game_of_life/main.sv:167]
+ERROR: [Synth 8-196] conditional expression could not be resolved to a constant [/home/beb/Documents/CompArch/olin-cafe-f21/01_game_of_life/main.sv:166]
+ERROR: [Synth 8-6156] failed synthesizing module 'main' [/home/beb/Documents/CompArch/olin-cafe-f21/01_game_of_life/main.sv:27]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2442.309 ; gain = 0.000 ; free physical = 331 ; free virtual = 3303
+---------------------------------------------------------------------------------
+RTL Elaboration failed
+INFO: [Common 17-83] Releasing license: Synthesis
+8 Infos, 0 Warnings, 0 Critical Warnings and 6 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 13 21:56:29 2021...
+Parent process (pid 14560) has died. This helper process will now exit
