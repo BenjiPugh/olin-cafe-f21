@@ -6,7 +6,7 @@ VVP=vvp
 # Look up .PHONY rules for Makefiles
 .PHONY: clean submission
 
-test_pulse_generator: test_pulse_generator.sv pulse_generator.sv
+test_pulse_generator: test_pulse_generator.sv pulse_generator.sv counter.sv register.sv
 	${IVERILOG} $^ -o test_pulse_generator.bin && ${VVP} test_pulse_generator.bin
 
 test_pwm: test_pwm.sv pulse_generator.sv pwm.sv
@@ -16,7 +16,7 @@ test_pwm: test_pwm.sv pulse_generator.sv pwm.sv
 test_triangle_generator: test_triangle_generator.sv triangle_generator.sv
 	${IVERILOG} $^ -o test_triangle_generator.bin && ${VVP} test_triangle_generator.bin
 
-test_slt: test_slt.sv slt.sv
+test_slt: test_slt.sv slt.sv adder_1.sv adder_n.sv subtractor.sv
 	${IVERILOG} $^ -o test_slt.bin && ${VVP} test_slt.bin
 
 # Call this to clean up all your generated files

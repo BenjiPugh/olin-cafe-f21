@@ -2,7 +2,7 @@ module mux_N_32(s, a, out);
 // 32 bit wide n:1 mux, where n is a power of 2
 // Uses recursion to generate smaller and smaller sub muxes to form a binary tree
 
-parameter N = 2;
+parameter N =  2;
 input wire [$clog2(N)-1:0] s; //Mux selector
 input wire [N*32-1:0] a; //The 32 bit wide, Nth order mux inputs
 

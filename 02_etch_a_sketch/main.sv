@@ -96,7 +96,6 @@ triangle_generator #(.N(PWM_WIDTH)) LED_FADER (
   .clk(clk), .rst(rst), .ena(step_100Hz), .out(led_pwm1)
 );
 
-
 endmodule
 
 `default_nettype wire // reengages default behaviour, needed when using 

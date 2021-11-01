@@ -4,13 +4,14 @@ IVERILOG=iverilog -Wall -Wno-sensitivity-entire-vector -Wno-sensitivity-entire-a
 VVP=vvp
 VVP_POST_ARGS=-fst
 
+DECODERS=decoder_1_to_2.sv decoder_2_to_4.sv decoder_3_to_8.sv decoder_4_to_16.sv decoder_5_to_32.sv
 # Look up .PHONY rules for Makefiles
 .PHONY: clean submission
 
 SRCS=mux4.sv mux8.sv mux16.sv mux32.sv
 
-test_sll : test_sll.sv shift_left_logical.sv $(SRCS)
-	${IVERILOG} $^ -o test_sll.bin && ${VVP} test_sll.bin -fst
+test_sll : test_sll.sv shift_left_logical.sv $(SRCS) $(DECODERS) shift_left.sv muxN.sv
+	${IVERILOG} $^ -o test_sll.bin && ${VVP} test_sll.bin
 waves_sll : test_sll
 	gtkwave sll.fst
 
@@ -25,7 +26,7 @@ waves_sra : test_sra
 	gtkwave sra.fst
 
 test_serial: test_parallel_to_serial_converter.sv parallel_to_serial_converter.sv
-	${IVERILOG} $^ -o test_serial.bin && ${VVP} test_serial.bin -fst
+	${IVERILOG} $^ -o test_serial.bin && ${VVP} test_serial.bin
 waves_serial: test_serial
 	gtkwave -a parallel_to_serial_converter.gtkw parallel_to_serial_converter.fst
 

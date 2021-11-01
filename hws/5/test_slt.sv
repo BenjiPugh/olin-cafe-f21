@@ -87,7 +87,7 @@ end
 always @(a or b) begin
   #1;
   assert(out === correct_out) else begin
-    $display("  ERROR: sum should be %b, is %b", out, correct_out);
+    $display("  ERROR: value is %b, should be %b", out, correct_out);
     errors = errors + 1;
   end
 end
