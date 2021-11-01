@@ -23,6 +23,9 @@ test_triangle_generator: tests/test_triangle_generator.sv triangle_generator.sv
 test_debouncer: tests/test_debouncer.sv debouncer.sv
 	${IVERILOG} $^ -o test_debouncer.bin && ${VVP} test_debouncer.bin
 
+test_edge_detector: tests/test_edge_detector.sv edge_detector.sv
+	${IVERILOG} $^ -o test_edge_detector.bin && ${VVP} test_edge_detector.bin
+
 test_main: tests/test_main.sv main.sv $(SRCS)
 	@echo "This might take a while, we're testing a lot of clock cycles!"
 	@echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
